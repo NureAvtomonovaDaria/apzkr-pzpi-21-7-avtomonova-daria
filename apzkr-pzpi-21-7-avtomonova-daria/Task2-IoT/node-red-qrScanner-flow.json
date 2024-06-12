@@ -1,0 +1,160 @@
+[
+    {
+        "id": "c99a4a13771c2289",
+        "type": "tab",
+        "label": "Поток 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3a10d3e20f295c46",
+        "type": "http in",
+        "z": "c99a4a13771c2289",
+        "name": "",
+        "url": "/scanQRCode",
+        "method": "post",
+        "upload": true,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 300,
+        "wires": [
+            [
+                "d1a9b3601312c354"
+            ]
+        ]
+    },
+    {
+        "id": "3e619d4471c97980",
+        "type": "http request",
+        "z": "c99a4a13771c2289",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://localhost:3001/scanQRCode",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "Content-Type",
+                "keyValue": "",
+                "valueType": "application/json",
+                "valueValue": ""
+            }
+        ],
+        "x": 1690,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d1a9b3601312c354",
+        "type": "function",
+        "z": "c99a4a13771c2289",
+        "name": "function 2",
+        "func": "msg.payload = msg.payload.qrCode;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 300,
+        "wires": [
+            [
+                "f4d61cba0948d7cf"
+            ]
+        ]
+    },
+    {
+        "id": "f4d61cba0948d7cf",
+        "type": "function",
+        "z": "c99a4a13771c2289",
+        "name": "function 3",
+        "func": "const base64Prefix = 'data:image/png;base64,';\nif (msg.payload.startsWith(base64Prefix)) {\n    msg.payload = msg.payload.slice(base64Prefix.length);\n}\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 280,
+        "wires": [
+            [
+                "fac913488d1014d4"
+            ]
+        ]
+    },
+    {
+        "id": "fac913488d1014d4",
+        "type": "base64",
+        "z": "c99a4a13771c2289",
+        "name": "",
+        "action": "",
+        "property": "payload",
+        "x": 780,
+        "y": 280,
+        "wires": [
+            [
+                "695fb134a963e402"
+            ]
+        ]
+    },
+    {
+        "id": "695fb134a963e402",
+        "type": "qrdecode",
+        "z": "c99a4a13771c2289",
+        "name": "",
+        "x": 1020,
+        "y": 280,
+        "wires": [
+            [
+                "24d695f2cd13dee0"
+            ]
+        ]
+    },
+    {
+        "id": "24d695f2cd13dee0",
+        "type": "json",
+        "z": "c99a4a13771c2289",
+        "name": "",
+        "property": "payload.value",
+        "action": "",
+        "pretty": false,
+        "x": 1290,
+        "y": 280,
+        "wires": [
+            [
+                "46ef88ad2df051a3"
+            ]
+        ]
+    },
+    {
+        "id": "46ef88ad2df051a3",
+        "type": "function",
+        "z": "c99a4a13771c2289",
+        "name": "function 4",
+        "func": "msg.payload = {\n    subscriptionId: msg.payload.value.subscriptionId,\n    userId: msg.payload.value.userId\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1480,
+        "y": 280,
+        "wires": [
+            [
+                "3e619d4471c97980"
+            ]
+        ]
+    }
+]
