@@ -1,0 +1,37 @@
+.company-page-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.gym-list {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.gym-item {
+    width: 300px;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.gym-item:hover {
+    background-color: #e0e0e0;
+}
+
+.gym-link{
+    text-decoration: none;
+    color: black;
+}
+
+.search-container input, select{
+    margin-top: 5px;
+}

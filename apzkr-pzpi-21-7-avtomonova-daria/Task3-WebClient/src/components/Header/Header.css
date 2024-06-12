@@ -1,0 +1,36 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #282c34;
+    color: white;
+    box-sizing: border-box;
+}
+
+.header-title {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: auto;
+    margin-left: 0;
+    display: flex;
+    align-items: center;
+}
+
+.header-auth {
+    display: flex;
+    gap: 15px;
+    margin-left: auto;
+}
+
+.header-link {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.header-link:hover {
+    text-decoration: underline;
+}
